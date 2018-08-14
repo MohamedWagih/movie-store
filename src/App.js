@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 // import * as movieService from './services/fakeMovieService';
 import Table from './components/Table/Table';
+import Grid from '@material-ui/core/Grid';
+import Navbar from './components/Navbar/Navbar';
 
 class App extends Component {
 
@@ -8,16 +10,15 @@ class App extends Component {
     // console.log(this.state.movies);
     
     return (
-      <div className="container">
-        <div className='row'>
-          <div className='col-12'>
-            <h2>Welcome To Our Store</h2>
-          </div>
-          <div className='col-12'>
-            <Table />
-          </div>
-        </div>
-      </div>
+      <Grid container spacin={24} justify='space-around' direction='row'>
+        <Navbar />
+        <Grid item xs={12}>
+          <h2>Welcome To Our Store</h2>
+        </Grid>
+        <Grid item xs={6}>
+          <Table />
+        </Grid>
+      </Grid>
     );
   }
 }
