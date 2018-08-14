@@ -1,0 +1,16 @@
+.tBody{
+    border-radius: 10px;
+    /* border: 20px solid red */
+}
+
+table{
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    /* background-color:transparent !important; */
+    background: rgba(0,0,0,.5) !important;
+}
+
+table th{
+    border:none !important;
+}

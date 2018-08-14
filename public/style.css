@@ -1,0 +1,14 @@
+body{
+    background: url(./bg.jpg) fixed center;
+}
+h2{
+    text-align: center;
+    color: white;
+    margin: 20px auto;
+    background: rgba(0,0,0,.5);
+    /* width: 500px; */
+    border-radius: 15px;
+    padding: 8px;
+    display: table;
+
+}
