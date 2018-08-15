@@ -15,7 +15,7 @@ class App extends Component {
         <Grid item xs={12}>
           <h2>Welcome To Our Store</h2>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={11} sm={6}>
           <Table />
         </Grid>
       </Grid>

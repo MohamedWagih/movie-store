@@ -14,8 +14,8 @@ import Filter from '../Filter/Filter';
 
 function getSorting(order, orderBy) {
   return order === "desc"
-    ? (a, b) => b[orderBy] - a[orderBy]
-    : (a, b) => a[orderBy] - b[orderBy];
+    ? (a, b) => b[orderBy] > a[orderBy]
+    : (a, b) => a[orderBy] > b[orderBy];
 }
 
 const columns= [
@@ -29,10 +29,12 @@ const styles = theme => ({
   root: {
     width: "100%",
     marginTop: theme.spacing.unit * 3,
-    overflowX: "auto"
+    overflowX: "auto",
+    // background:'rgba(0,0,0,.3)',
   },
   table: {
-    minWidth: 700
+    minWidth: 700,
+    // background:'rgba(255,255,255,.0)',
   },
   tableWrapper: {
     overflowX: "auto"
@@ -49,7 +51,7 @@ const CustomTableCell = withStyles(theme => ({
     },
   }))(TableCell);
 
-class SimpleTable extends Component {
+class EnhancedTable extends Component {
   state = {
     data: movieService.getMovies(),
     page: 0,
@@ -57,7 +59,7 @@ class SimpleTable extends Component {
     filter:false,
     filterBy:'',
     order: "desc",
-    orderBy: "title",
+    orderBy: "dailyRentalRate",
   };
 
   handleChangePage = (event, page) => {
@@ -92,22 +94,22 @@ class SimpleTable extends Component {
     return (
       <React.Fragment>
         <Filter handleChange={this.handleFilterRequest}/>
-        <Paper className={classes.root}>
+        <Paper className={classes.root} >
           <div className={classes.tableWrapper}>
             <Table className={classes.table}>
               <TableHead>
                 <TableRow>
                   {
                     columns.map(col=>{
-                      return<CustomTableCell numeric={col.numeric}>
-                        <TableSortLabel
-                          active={orderBy === col.id}
-                          direction={order}
-                          onClick={()=>this.handleSortRequest(col.id)}
-                        >
-                          {col.label}
-                        </TableSortLabel>
-                      </CustomTableCell>
+                      return<CustomTableCell key={col.id} numeric={col.numeric}>
+                              <TableSortLabel
+                                active={orderBy === col.id}
+                                direction={order}
+                                onClick={()=>this.handleSortRequest(col.id)}
+                              >
+                                {col.label}
+                              </TableSortLabel>
+                            </CustomTableCell>
                     })
                   }
                   
@@ -120,7 +122,7 @@ class SimpleTable extends Component {
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map(movie => {
                     return (
-                      <TableRow key={movie.id}>
+                      <TableRow key={movie._id}>
                         <TableCell component="th" scope="row">
                           {movie.title}
                         </TableCell>
@@ -158,8 +160,8 @@ class SimpleTable extends Component {
   }
 }
 
-SimpleTable.propTypes = {
+EnhancedTable.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(SimpleTable);
+export default withStyles(styles)(EnhancedTable);

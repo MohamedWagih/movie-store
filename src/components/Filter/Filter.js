@@ -7,7 +7,6 @@ const styles = theme => ({
   formControl: {
     margin: theme.spacing.unit,
     minWidth: 120,
-    
   },
   selectEmpty: {
     marginTop: theme.spacing.unit * 2,
@@ -17,11 +16,16 @@ const styles = theme => ({
   }
 });
 
-class ControlledOpenSelect extends React.Component {
+class FilterSelect extends React.Component {
   state = {
     genre: "",
     genresNames:['Action', 'Comedy', 'Thriller']
   };
+
+  onChangeHandler = (event)=>{
+    this.props.handleChange(event);
+    this.setState({genre:event.target.value})
+  }
 
   render() {
     const { classes } = this.props;
@@ -34,7 +38,7 @@ class ControlledOpenSelect extends React.Component {
           </InputLabel>
           <Select
             value={this.state.genre}
-            onChange={this.props.handleChange}
+            onChange={this.onChangeHandler}
             input={<Input name="genre" id="genre-label-placeholder" />}
             displayEmpty
             name="genre"
@@ -53,8 +57,8 @@ class ControlledOpenSelect extends React.Component {
   }
 }
 
-ControlledOpenSelect.propTypes = {
+FilterSelect.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(ControlledOpenSelect);
+export default withStyles(styles)(FilterSelect);
